@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  # Always a POST request so that it can support long request bodies!
   post "/graphql", to: "graphql#execute"
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
