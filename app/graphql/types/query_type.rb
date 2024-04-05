@@ -21,10 +21,17 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    
+
     field :repos, [RepoType], null: false
     def repos
       Repo.all
+    end
+
+    field :repo, RepoType, null: false do
+      argument :id, ID, required: true
+    end
+    def repo(id:)
+      Repo.find(id)
     end
 
   end
