@@ -14,6 +14,4 @@ module Types
       object.name.reverse
     end
   end
-
-
 end
