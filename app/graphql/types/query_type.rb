@@ -30,6 +30,8 @@ module Types
     field :repo, RepoType, null: false do
       argument :id, ID, required: true
     end
+
+    # This method takes in the id arg from the field and uses it to resolve an object
     def repo(id:)
       Repo.find(id)
     end
