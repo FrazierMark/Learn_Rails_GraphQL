@@ -10,21 +10,23 @@ RSpec.describe "Graphql, repo query, with reviews" do
 
   it "retrieves a single repo, with two pages of reviews" do
     query = <<~QUERY
-    query ($id: ID!, $after: String) {
-      repo(id: $id) {
-        name
-        reviews(after: $after) {
-          nodes {
-            rating
-            comment
-          }
-          pageInfo {
-            endCursor
+      query ($id: ID!, $after: String) {
+        repo(id: $id) {
+          ...on Repo {
+            name
+            reviews(after: $after) {
+              nodes {
+                rating
+                comment
+              }
+              pageInfo {
+                endCursor
+              }
             }
           }
         }
       }
-      QUERY
+    QUERY
 
       post "/graphql", params: { query: query, variables: { id: repo.id } }
       expect(response.parsed_body).not_to have_errors

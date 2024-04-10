@@ -10,14 +10,16 @@ RSpec.describe "Graphql, repo query, with categories" do
 
   it "retrieves a single repo, with its categories" do
     query = <<~QUERY
-    query findRepoCategories($id: ID!) {
-      repo(id: $id) {
-        name
-        categories {
-          name
+      query ($id: ID!) {
+        repo(id: $id) {
+          ...on Repo {
+            name
+            categories {
+              name
+            }
+          }
         }
       }
-    }
     QUERY
 
     post "/graphql", params: { query: query, variables: { id: repo.id } }

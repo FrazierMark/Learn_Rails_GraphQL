@@ -12,25 +12,28 @@ RSpec.describe "Graphql, repo query, with activity" do
 
   it "retrieves a single repo with a list of activities" do
     query = <<~QUERY
-    query ($id: ID!) {
-      repo(id: $id) {
-        name
-        activities {
-          nodes {
-            __typename
-            event {
-              ... on Review {
-                rating
-                comment
+      query ($id: ID!) {
+        repo(id: $id) {
+          ...on Repo {
+            name
+            activities(after: "100") {
+              nodes {
+                __typename
+                event {
+                  ... on Review {
+                    rating
+                    comment
+                  }
+
+                  ... on Like {
+                    createdAt
+                  }
                 }
-              ... on Like {
-                createdAt
               }
             }
           }
         }
       }
-    }
     QUERY
 
     post "/graphql", params: { query: query, variables: { id: repo.id } }

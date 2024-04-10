@@ -5,13 +5,15 @@ RSpec.describe "Graphql, repo query" do
 
   it "retrieves a single repo" do
     query = <<~QUERY
-    query ($id: ID!) {
-      repo(id: $id) {
-        name
-        nameReversed
-        url
+      query ($id: ID!) {
+        repo(id: $id) {
+          ...on Repo {
+            name
+            nameReversed
+            url
+          }
+        }
       }
-    }
     QUERY
 
     post "/graphql", params: { query: query, variables: { id: repo.id } }

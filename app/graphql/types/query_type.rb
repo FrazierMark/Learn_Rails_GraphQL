@@ -21,6 +21,9 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
+    field :repo, RepoResultType, null: false do
+      argument :id, ID, required: true
+    end
 
     field :repos, [RepoType], null: false
     def repos
@@ -33,7 +36,7 @@ module Types
 
     # This method takes in the id arg from the field and uses it to resolve an object
     def repo(id:)
-      Repo.find_by(id: id || {message: "Could not find a repository with id: #{id}"})
+      Repo.find_by(id: id) || { message: "Could not find a repository with id='#{id}'" }
     end
 
     field :category, CategoryType, null: false do
