@@ -7,5 +7,6 @@ module Types
     # defined in app/graphql/mutations/reviews/add.rb
     field :add_review, mutation: Mutations::Reviews::Add
     field :update_review, mutation: Mutations::Reviews::Update
+    field :delete_review, mutation: Mutations::Reviews::Delete
   end
 end
