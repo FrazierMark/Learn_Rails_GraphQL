@@ -1,6 +1,7 @@
 module Mutations
   module Reviews
     class Update < BaseMutation
+      graphql_name 'UpdateReview'
       type Types::ReviewType
 
       argument :review_id, ID, required: true

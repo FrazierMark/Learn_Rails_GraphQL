@@ -1,6 +1,8 @@
 module Mutations
   module Reviews
     class Add < BaseMutation
+      graphql_name 'AddReview'
+
       # return type of the mutation
       type Types::ReviewType, null: false
 
