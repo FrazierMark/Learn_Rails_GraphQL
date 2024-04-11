@@ -9,5 +9,8 @@ module Types
     field :update_review, mutation: Mutations::Reviews::Update
     field :delete_review, mutation: Mutations::Reviews::Delete
     field :add_category, mutation: Mutations::Categories::Add
+    field :create_repo, mutation: Mutations::Repos::Create
+    field :update_repo, mutation: Mutations::Repos::Update
+    field :delete_repo, mutation: Mutations::Repos::Delete
   end
 end
