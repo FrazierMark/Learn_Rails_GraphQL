@@ -7,11 +7,8 @@ module Mutations
       argument :name, String, required: true
       argument :url, String, required: true
 
-      def resolve(name:, url:, category_id:, )
-        Repo.create!(
-          name: name,
-          url: url,
-        )
+      def resolve(**args )
+        Repo.create!(args)
       end
     end
   end
