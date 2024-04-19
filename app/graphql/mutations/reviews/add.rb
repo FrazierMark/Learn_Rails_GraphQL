@@ -2,6 +2,7 @@ module Mutations
   module Reviews
     class Add < BaseMutation
       graphql_name 'AddReview'
+      include Dry::Monads[:result]
 
       # return type of the mutation
       type Types::ReviewType, null: false
@@ -17,6 +18,11 @@ module Mutations
           rating: rating,
           comment: comment,
         )
+        if review.save
+          Success(review)
+        else
+          Failure(review.errors)
+        end
       end
     end
   end
